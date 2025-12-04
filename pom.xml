@@ -1,0 +1,77 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+         http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <!-- Versão do modelo POM usada -->
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- Identificação do projeto -->
+    <groupId>br.com.leandrop</groupId>
+    <artifactId>automatizado</artifactId>
+    <packaging>jar</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <name>automatizado</name>
+
+    <url>http://maven.apache.org</url>
+
+    <properties>
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
+
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+</properties>
+
+    <dependencies>
+
+        <!-- 
+            ✔ JUnit 4.11
+            Framework de testes unitários.
+            Usado para escrever e executar testes automáticos.
+
+            Como o escopo é 'test', essa dependência só é incluída 
+            durante a execução dos testes e não vai para o JAR final.
+        -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.11</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- 
+            ✔ Selenium Chrome Driver
+            Permite automatizar o navegador Google Chrome.
+
+            Inclui o WebDriver necessário para abrir, controlar e fechar 
+            uma janela do Chrome durante testes automatizados.
+            
+            Como está em 'test', é usado apenas quando você executa testes.
+        -->
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-chrome-driver</artifactId>
+            <version>3.141.59</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- 
+            ✔ Selenium Support
+            Fornece classes utilitárias do Selenium:
+            - WebDriverWait
+            - ExpectedConditions
+            - PageFactory
+            - Page Objects
+
+            É um complemento usado em praticamente todos os projetos de automação.
+        -->
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-support</artifactId>
+            <version>3.141.59</version>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+</project>
