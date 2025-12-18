@@ -1,11 +1,13 @@
 # 🧪 Projeto de Testes Automatizados com **Java + Selenium + JUnit**
 
-Este projeto demonstra como implementar testes automatizados utilizando **Selenium WebDriver**, **Java**, **JUnit** e o padrão de arquitetura **Page Object Model (POM)**.
+Este projeto tem como objetivo demonstrar a implementação de **testes automatizados funcionais** utilizando **Java**, **Selenium WebDriver**, **JUnit** e o padrão de arquitetura **Page Object Model (POM)**.
 
-O objetivo é oferecer uma estrutura clara, organizada e pronta para uso em aplicações reais, facilitando manutenção, escalabilidade e reutilização de código.
+A aplicação automatizada contempla dois fluxos principais:
 
+* 🔐 **Login no sistema**
+* 📦 **Controle de Produto** (cadastro, validações e interações)
 
-O exemplo utilizado é a automação da página do **Google**, realizando buscas e validando resultados.
+A estrutura foi pensada para ser **organizada, reutilizável e de fácil manutenção**, seguindo boas práticas de automação de testes.
 
 ---
 
@@ -14,142 +16,156 @@ O exemplo utilizado é a automação da página do **Google**, realizando buscas
 ```
 AUTOMATIZADO
 ├── .vscode/
+│   ├── launch.json
+│   └── settings.json
 │
 ├── src/
 │   └── test/
 │       └── java/
 │           └── automatizado/
-│               ├── page/
-│               │   ├── BasePO.java
-│               │   └── GooglePO.java
+│               ├── construtor/
+│               │   └── ProdutoBuilder.java
 │               │
-│               ├── resource/
+│               ├── pagina/
+│               │   ├── BasePO.java
+│               │   ├── ControleDeProdutoPO.java
+│               │   ├── GooglePO.java
+│               │   └── LoginPO.java
+│               │
+│               ├── recurso/
 │               │   └── chromedriver.exe
 │               │
 │               └── teste/
 │                   ├── BaseTest.java
-│                   └── GoogleTest.java
+│                   ├── ControleDeProdutoTest.java
+│                   ├── GoogleTest.java
+│                   └── LoginTest.java
 │
 ├── target/
 │
+├── README.md
+├── .txt
 └── pom.xml
 ```
 
 ---
 
-## 🧱 **Explicação das Pastas**
+## 🧱 **Explicação das Pastas e Arquivos**
 
-### **📁 page/** — *Page Objects (POO + POM)*
+### **📁 construtor/** — *Builder Pattern*
 
-Contém classes que representam páginas reais do sistema.
+Contém classes responsáveis pela construção de objetos usados nos testes.
 
-* `BasePO.java`: classe mãe das páginas.
-* `GooglePO.java`: representa a página do Google, incluindo métodos como `pesquisar()`.
-
-Esse padrão torna os testes mais limpos e fáceis de manter.
+* `ProdutoBuilder.java`: facilita a criação de produtos com dados válidos ou customizados, tornando os testes mais legíveis e organizados.
 
 ---
 
-### **📁 resource/**
+### **📁 pagina/** — *Page Objects (POM)*
 
-Contém arquivos utilizados na automação.
+Cada classe representa uma página real da aplicação, encapsulando elementos e ações.
 
-* `chromedriver.exe`: driver necessário para o Selenium controlar o Chrome.
+* `BasePO.java`: classe base para todos os Page Objects, contendo métodos e atributos comuns.
+* `LoginPO.java`: representa a página de login, com ações como preencher usuário, senha e efetuar login.
+* `ControleDeProdutoPO.java`: representa a página de controle de produtos, contendo ações como cadastrar, validar campos e interagir com a listagem.
+* `GooglePO.java`: utilizado como exemplo didático de automação de busca.
+
+Esse padrão reduz duplicação de código e melhora a manutenção dos testes.
+
+---
+
+### **📁 recurso/**
+
+Contém recursos necessários para execução da automação.
+
+* `chromedriver.exe`: driver responsável por permitir que o Selenium controle o navegador Google Chrome.
 
 ---
 
 ### **📁 teste/** — *Casos de Teste*
 
-Contém os testes automatizados.
+Contém os cenários de teste automatizados.
 
-* `BaseTest.java`: inicializa o WebDriver, abre o navegador e define configurações.
-* `GoogleTest.java`: contém os cenários de teste que utilizam os Page Objects.
+* `BaseTest.java`: responsável por inicializar e finalizar o WebDriver, além das configurações globais dos testes.
+* `LoginTest.java`: contém os testes relacionados ao fluxo de login, validando autenticação com dados válidos e inválidos.
+* `ControleDeProdutoTest.java`: valida os fluxos do controle de produtos, utilizando o `ProdutoBuilder` e os métodos do Page Object.
+* `GoogleTest.java`: exemplo de teste de busca utilizando o Google.
 
 ---
 
-## 🚀 **Como executar o projeto (passo a passo)**
+## 🔐 **Fluxo Automatizado de Login**
 
-### ✔️ **1. Instalar dependências obrigatórias**
+1. O navegador é iniciado pelo `BaseTest`.
+2. A página de login é carregada.
+3. A classe `LoginPO` é instanciada.
+4. Os campos de usuário e senha são preenchidos.
+5. A ação de login é executada.
+6. O teste valida se o acesso foi realizado com sucesso ou se a mensagem de erro foi exibida.
 
-* Java JDK 8+ instalado
-* Maven instalado e configurado
+---
+
+## 📦 **Fluxo Automatizado de Controle de Produto**
+
+1. O sistema é acessado após login válido.
+2. A página de controle de produto é aberta.
+3. Um produto é criado utilizando o `ProdutoBuilder`.
+4. Os dados do produto são preenchidos na tela.
+5. O cadastro é realizado.
+6. O teste valida mensagens, campos obrigatórios ou a presença do produto na listagem.
+
+---
+
+## 🚀 **Como executar o projeto**
+
+### ✔️ **Pré-requisitos**
+
+* Java JDK 11 ou superior
+* Maven instalado
 * Google Chrome instalado
-* ChromeDriver compatível com a versão do seu Chrome
+* ChromeDriver compatível com a versão do Chrome
 
-### ✔️ **2. Clonar o repositório**
+---
 
-```
-git clone https://github.com/Leandro-Pinheiro-Dev/Selenium-e-Java.git
-```
+### ✔️ **Executar os testes**
 
-### ✔️ **3. Importar o projeto na sua IDE**
+Pela IDE:
 
-Pode ser VSCode, IntelliJ IDEA ou Eclipse.
+* Execute as classes de teste anotadas com `@Test`
 
-### ✔️ **4. Verificar o caminho do ChromeDriver**
+Via Maven:
 
-O caminho configurado está em:
-
-```
-src/test/java/automatizado/resource/chromedriver.exe
-```
-
-Caso necessário, atualize a linha em `BaseTest.java`:
-
-```
-private static final String CAMINHO_DRIVER = "src/test/java/automatizado/resource/chromedriver.exe";
-```
-
-### ✔️ **5. Rodar os testes**
-
-Você pode rodar:
-
-* Pela IDE (run nos métodos com @Test), ou
-* Via Maven:
-
-```
+```bash
 mvn test
 ```
 
 ---
 
-## 🔍 **Como funciona a execução**
-
-1. `BaseTest` inicia o navegador.
-2. O Google é carregado.
-3. A classe `GooglePO` é instanciada.
-4. O teste chama o método `pesquisar()`.
-5. Um `WebDriverWait` aguarda o resultado aparecer.
-6. O texto exibido é capturado.
-7. O JUnit verifica se o resultado contém o esperado.
-
----
-
-## 🧪 **Exemplo de Caso de Teste**
-
-O teste realiza a busca "Batata Frita" e valida o resultado retornado pelo Google:
+## 🧪 **Exemplo de Caso de Teste (Login)**
 
 ```java
 @Test
-public void TC001_deveSerPossivelPesquisarNoGoogleOTextoBatataFrita() {
-    googlePage.pesquisar("Batata Frita");
+public void deveRealizarLoginComUsuarioValido() {
+    loginPage.preencherUsuario("admin");
+    loginPage.preencherSenha("123456");
+    loginPage.clicarEmEntrar();
 
-    WebDriverWait wait = new WebDriverWait(driver, 50);
-    wait.until(ExpectedConditions.visibilityOf(googlePage.divResultadoPesquisa));
-
-    String resultado = googlePage.ObetrResultadoDaPesquisa();
-
-    assertTrue(resultado.contains("Aproximadamente"));
+    assertTrue(loginPage.usuarioLogadoComSucesso());
 }
 ```
 
 ---
 
-## 🧩 Tecnologias utilizadas
+## 🧩 **Tecnologias Utilizadas**
 
 * **Java 17+**
 * **Selenium WebDriver**
 * **JUnit 4**
 * **Page Object Model (POM)**
+* **Builder Pattern**
 * **ChromeDriver**
 * **Maven**
+
+---
+
+## 📌 **Observações Finais**
+
+Este projeto pode ser facilmente expandido para novos módulos da aplicação, mantendo a separação de responsabilidades e boas práticas de automação de testes.
