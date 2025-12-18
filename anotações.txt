@@ -1,0 +1,19 @@
+Passo a passo para criação de testes automatizados.
+
+1ºEstruturar o pegeObject de login.
+    1.1 Criar um arquivo chamado LoginPO.java dentro da pasta page. ok
+    1.2 Fazer herança do arquivo BasePO.java  ok
+    1.3 Fazer o mapeamneto de todos os elementos da tela de login. ok
+        1.3.1 Criar os elementos com pageFactory. ok
+
+2º 1ºEstruturar o arquivo de teste de login
+
+    2.1 Criar um arquivochamado LoginTest.java dentro da pasta teste. ok
+    2.2 Fazer a herança do arquivo BaseTest.java ok
+    2.3 Criar um meodo inicial que saiba instanciar uma PO de login. ok
+    2.4 Criar os teste baseados na planilha
+        2.4.1 Não deve logar no sistema com usuario e senha brancos. ok
+        2.4.2 Não deve logar no sistema com usuario incorreto e senha em branco. ok
+        2.4.3 Não deve logar no sistema com usuario em branco e senha incorreto. ok
+        2.4.4 Não deve logar no sistema com usuario e senha incorretos. ok
+
